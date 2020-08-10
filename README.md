@@ -5,7 +5,7 @@
 | Column                | type    |   Options    |
 |-----------------------|---------|--------------|
 | nickname              | string  | null: false  |
-| mail                  | string  | null: false  |
+| email                 | string  | null: false  |
 | password              | string  | null: false  |
 | password_confirmation | string  | null: false  |
 | first_name            | string  | null: false  |
