@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :birth_date, presence: true
   with_options presence: true do
     validates :email, uniqueness: true
-    validates :email, foramat: {with: VALID_EMAIL_REDEX, message: "is invalid, Include '@'."}
+    validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "is invalid, Include '@'."}
     validates :password, length: { minimum: 6 }
     validates :first_name, format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: "is invalid. Input full_width characters."}
     validates :family_name, format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: "is invalid. Input full_width characters."}
