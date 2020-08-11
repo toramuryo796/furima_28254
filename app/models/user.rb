@@ -8,7 +8,7 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname, length: {maximum: 40}, format: {with: /\A[a-zA-Zぁ-んァ-ンー-龥]+\Z/}
     validates :email, uniqueness: true, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "is invalid, Include '@'."}
-    validates :password, format: {with: /\A[a-zA-Z0-9]+\Z/, message: "is invalid.Input half_width characters"}
+    validates :password, format: {with: /(?=.*\d+.*)(?=.*[a-zA-Z]+.*)+/, message: "is invalid.Input half_width characters and number."}
     validates :first_name, format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: "is invalid. Input full_width characters."}
     validates :family_name, format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: "is invalid. Input full_width characters."}
     validates :first_name_reading, format: {with: /\A[ァ-ヶー-]+\z/, message: "is invalid. Input half_width characters."}

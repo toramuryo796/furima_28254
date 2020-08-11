@@ -36,8 +36,8 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
     it "パスワードが5文字以下だと登録できない" do
-      @user.password = "12345"
-      @user.password_confirmation = "12345"
+      @user.password = "a2345"
+      @user.password_confirmation = "a2345"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
@@ -45,7 +45,19 @@ RSpec.describe User, type: :model do
       @user.password = "あいうえおか"
       @user.password_confirmation = "あいうえおか"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid.Input half_width characters")
+      expect(@user.errors.full_messages).to include("Password is invalid.Input half_width characters and number.")
+    end
+    it "パスワードが半角英字だけでは登録できない" do
+      @user.password = "abcdefg"
+      @user.password_confirmation = "abcdefg"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid.Input half_width characters and number.")
+    end
+    it "パスワードが数字だけでは登録できない" do
+      @user.password = "123456"
+      @user.password_confirmation = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid.Input half_width characters and number.")
     end
     it "ユーザー本名(苗字)がなければ登録できない" do
       @user.family_name = nil
@@ -57,23 +69,38 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("First name can't be blank", "First name is invalid. Input full_width characters.")
     end
-    it "ユーザー本名(苗字)が全角出ないとと登録できない" do
+    it "ユーザー本名(苗字)が全角でないと登録できない" do
       @user.family_name = "abe"
       @user.valid?
       expect(@user.errors.full_messages).to include("Family name is invalid. Input full_width characters.") 
     end
-    it "ユーザー本名(名前)は全角でないと登録できない" do
-      @user.first_name = "abe"
+    it "ユーザー本名(苗字)に半角があると登録できない" do
+      @user.family_name = "阿部Chris"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name is invalid. Input full_width characters.") 
+    end
+    it "ユーザー本名(名前)に半角があると登録できない" do
+      @user.first_name = "ひろしChris"
       @user.valid?
       expect(@user.errors.full_messages).to include("First name is invalid. Input full_width characters.") 
     end
-    it "ユーザー本名(苗字)の振り仮名が全角カタカナでなければ登録できない" do
+    it "ユーザー本名(苗字)の振り仮名が全角カタカナでなければ登録できない(漢字)" do
       @user.family_name_reading = "阿部"
       @user.valid?
       expect(@user.errors.full_messages).to include("Family name reading is invalid. Input half_width characters.") 
     end
-    it "ユーザー本名(名前)の振り仮名が全角カタカナでなければ登録できない" do
-      @user.first_name_reading = "阿部"
+    it "ユーザー本名(苗字)の振り仮名が全角カタカナでなければ登録できない(ひらがな)" do
+      @user.family_name_reading = "あべ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name reading is invalid. Input half_width characters.") 
+    end
+    it "ユーザー本名(名前)の振り仮名が全角カタカナでなければ登録できない(漢字)" do
+      @user.first_name_reading = "宏"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name reading is invalid. Input half_width characters.") 
+    end
+    it "ユーザー本名(名前)の振り仮名が全角カタカナでなければ登録できない(ひらがな)" do
+      @user.first_name_reading = "ひろし"
       @user.valid?
       expect(@user.errors.full_messages).to include("First name reading is invalid. Input half_width characters.") 
     end
