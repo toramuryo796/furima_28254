@@ -3,4 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+        
+  validates :nickname, presence: true
+  validates :birth_date, presence: true
+  with_options presence: true do
+    validates :email, uniqueness: true
+    validates :email, foramat: {with: VALID_EMAIL_REDEX, message: "is invalid, Include '@'."}
+    validates :password, length: { minimum: 6 }
+    validates :first_name, format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: "is invalid. Input full_width characters."}
+    validates :family_name, format: {with: /\A[ぁ-んァ-ンー-龥]+\z/, message: "is invalid. Input full_width characters."}
+    validates :first_name_reading, format: {with: /\A[ァ-ヶー-]+\z/, message: "is invalid. Input half_width characters."}
+    validates :family_name_reading, format: {with: /\A[ァ-ヶー-]+\z/, message: "is invalid. Input half_width characters."}
+  end
 end
