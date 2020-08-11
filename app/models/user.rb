@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
         
-  validates :nickname, presence: true
   validates :birth_date, presence: true
   with_options presence: true do
+    validates :nickname, length: {maximum: 40}
     validates :email, uniqueness: true
     validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "is invalid, Include '@'."}
     validates :password, length: { minimum: 6 }
