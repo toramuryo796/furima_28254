@@ -3,6 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  has_many :items
+  has_many :purchase
     
   full_width_regex = /\A[ぁ-んァ-ンー-龥]+\z/
   katakana_regex = /\A[ァ-ヶー-]+\z/
