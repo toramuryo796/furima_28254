@@ -93,6 +93,7 @@
         <span>販売価格<br>(¥300〜9,999,999)</span>
         <a class="question" href="#">?</a>
       </div>
+
       <div>
         <div class="price-content">
           <div class="price-text">
@@ -102,6 +103,7 @@
           <span class="sell-yen"></span>
           <%= f.text_field :price, class:"price-input", id:"item-price", placeholder:"例）300" %>円
         </div>
+
         <div class="price-content">
           <span>販売手数料 (10%)</span>
           <span>
@@ -112,10 +114,15 @@
             </span>
           </span>
         </div>
+
         <div class="price-content">
           <span>販売利益</span>
           <span>
-            <span id='profit'><%= @profit %></span>円
+            <span id='profit'>
+              <div id="completed-profit">
+                <%= "#{@profit}円" %>
+              </div>
+            </span>
         </div>
         </span>
       </div>
