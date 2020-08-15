@@ -3,9 +3,8 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe "商品出品" do
     before do
-      @user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item)
-      @item.user_id = @user.id
+      @item.image = fixture_file_upload('public/images/test_image.png')
     end
     it "全ての記入事項が正しく記入さていれば出品できる" do
       expect(@item).to be_valid
@@ -21,6 +20,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Title is invalid. Input within 40 characters.")
     end
     it "画像がなければ出品できない" do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
     end
     it "商品説明が空だと出品できない" do
       @item.explain = nil
