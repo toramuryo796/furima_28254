@@ -98,9 +98,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Origin area can't be blank")
     end
     it "発送までの日数について選択していなければ出品できない" do
-      @item.take_days_id = nil
+      @item.take_day_id = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("Take days can't be blank")
+      expect(@item.errors.full_messages).to include("Take day can't be blank", "Take day is not a number")
     end
   end
 end

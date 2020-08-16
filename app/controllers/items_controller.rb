@@ -26,6 +26,9 @@ class ItemsController < ApplicationController
     end
   end
   
+  def edit
+  end
+
   def commission
   end
 
@@ -36,7 +39,7 @@ class ItemsController < ApplicationController
   private
   
   def item_params
-    params.require(:item).permit(:title, :explain, :price, :image, :category_id, :status_id, :fee_id, :origin_area_id, :take_days_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:title, :explain, :price, :image, :category_id, :status_id, :fee_id, :origin_area_id, :take_day_id).merge(user_id: current_user.id)
   end
 
   def ajax

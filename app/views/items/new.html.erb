@@ -82,7 +82,7 @@
           発送までの日数
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:take_days_id, TakeDay.all, :id, :name, {include_blank:"---"}, {class:"select-box", id:"item-scheduled-delivery"}) %>
+        <%= f.collection_select(:take_day_id, TakeDay.all, :id, :name, {include_blank:"---"}, {class:"select-box", id:"item-scheduled-delivery"}) %>
       </div>
     </div>
     <%# /配送について %>
