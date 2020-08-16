@@ -184,10 +184,10 @@
   </div>
   <%# //商品一覧 %>
 </div>
-<div class='purchase-btn'>
-  <span class='purchase-btn-text'>出品する</span>
-  <a href="#">
+<div class='purchase-btn' , data-turbolinks="false">
+  <%= link_to new_item_path do %>
+    <span class='purchase-btn-text'>出品する</span>
     <%= image_tag 'camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
-  </a>
+  <% end %>
 </div>
 <%= render "shared/footer" %>

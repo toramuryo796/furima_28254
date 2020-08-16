@@ -20,22 +20,27 @@
 - has_many :purchases
 
 ## Items テーブル
-| Column     | type       |   Options                      |
-|------------|------------|--------------------------------|
-| image      | string     | null: false                    |
-| title      | string     | null: false                    |
-| text       | text       | null: false                    |
-| price      | integer    | null: false                    |
-| category   | integer    | null: false                    |
-| status     | integer    | null: false                    |
-| fee        | integer    | null: false                    |
-| origin_area| integer    | null: false                    |
-| take_days  | integer    | null: false                    |
-| user       | references | null: false, foreign_key: true |
+| Column         | type       |   Options                      |
+|----------------|------------|--------------------------------|
+| title          | string     | null: false                    |
+| text           | text       | null: false                    |
+| price          | integer    | null: false                    |
+| category_id    | integer    | null: false                    |
+| status_id      | integer    | null: false                    |
+| fee_id         | integer    | null: false                    |
+| origin_area_id | integer    | null: false                    |
+| take_day_id   | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :purchase
+- has_one_attached :image
+- belongs_to_active_hash :category
+- belongs_to_active_hash :status
+- belongs_to_active_hash :fee
+- belongs_to_active_hash :origin_area
+- belongs_to_active_hash :take_day
 
 ## purchases テーブル
 | Column | type       |   Options                       |
