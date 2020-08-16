@@ -9,6 +9,14 @@ RSpec.describe Item, type: :model do
     it "全ての記入事項が正しく記入さていれば出品できる" do
       expect(@item).to be_valid
     end
+    it "価格が300円以上であれば出品できる" do
+      @item.price = "300"
+      expect(@item).to be_valid
+    end
+    it "価格が9,999,999円以内であれば出品できる" do
+      @item.price = "9999999"
+      expect(@item).to be_valid
+    end
     it "商品の名前が空だと出品できない" do
       @item.title = nil
       @item.valid?
@@ -40,12 +48,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price can't be blank", "Price is invalid. Input number from 300 to 9,999,999.", "Price is invalid. Input number.") 
     end
     it "価格が300円未満だと出品できない" do
-      @item.price = Faker::Number.within(range: 1..299)
+      @item.price = "299"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is invalid. Input number from 300 to 9,999,999.")
     end
     it "価格が10,000,000円以上だと出品できない" do
-      @item.price = Faker::Number.number(digits: 8)
+      @item.price = "10000000"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is invalid. Input number from 300 to 9,999,999.")
     end
