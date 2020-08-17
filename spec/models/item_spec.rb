@@ -37,6 +37,7 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include("Explain can't be blank")
     end
+
     it "商品説明がが1001文字以上だと出品できない" do
       @item.explain = Faker::Lorem.characters(number: 1001)
       @item.valid?

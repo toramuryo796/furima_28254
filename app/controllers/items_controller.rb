@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :ajax, only: [:commission, :profit]
+  before_action :item_find , only: [:edit, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -28,7 +29,6 @@ class ItemsController < ApplicationController
   end
   
   def edit
-    @item = Item.find(params[:id])
     @price = @item.price
     if @price 
       @commission = (@price * 0.1).to_i
@@ -37,7 +37,6 @@ class ItemsController < ApplicationController
   end
   
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to root_path
     else
@@ -60,4 +59,9 @@ class ItemsController < ApplicationController
     item = Item.new(item_params)
     render json:{ item: item }
   end
+
+  def item_find 
+    @item = Item.find(params[:id])
+  end
+
 end
