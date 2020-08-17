@@ -6,7 +6,6 @@ function update_price () {
     // 入力ごとに表示されている文字を消す
     if (completedCommission){
       completedCommission.textContent("円")
-      // completedCommission.parentNode.removeChild(completedCommission)
     }
     const price = inputPrice.value
     const commission = price * 0.1
