@@ -4,7 +4,6 @@ class PurchasesController < ApplicationController
   before_action :move_to_root, only: [:index, :create]
 
   def index
-    # binding.pry
     @purchase = Purchase.new
   end
 
@@ -24,7 +23,6 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    # params.permit(:token).merge(user_id: current_user.id, item_id: params[:item_id])
     params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id,  item_id: params[:item_id])
   end
 
@@ -42,14 +40,12 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_login
-    # binding.pry
     unless user_signed_in?   
       redirect_to new_user_session_path
     end
   end
 
   def move_to_root
-    # binding.pry
     if current_user == @item.user
       redirect_to root_path
     end
