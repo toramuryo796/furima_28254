@@ -7,11 +7,12 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("../calc_commission")
-require("../calc_profit")
-require("../commission_update")
-require("../profit_update")
+require("../commission_profit_new")
+require("../commission_profit_update")
 require("../purchase")
+// require("../profit_update")
+// require("../calc_commission")
+// require("../calc_profit")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
