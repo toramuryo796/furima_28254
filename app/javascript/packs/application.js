@@ -11,6 +11,7 @@ require("../calc_commission")
 require("../calc_profit")
 require("../commission_update")
 require("../profit_update")
+require("../purchase")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

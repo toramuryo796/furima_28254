@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post 'items/profit', to: 'items#profit'
 
   resources :items do
-    resources :purchases, only: [:new, :create]
+    resources :purchases, only: [:index, :create]
   end
   
 end

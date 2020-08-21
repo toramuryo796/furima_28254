@@ -31,12 +31,12 @@
       <%= link_to '削除', item_path(@item), method: :delete, class:'item-destroy' %>
     <% else %>
       <% unless @item.purchase %>
-        <%= link_to '購入画面に進む', new_item_purchase_path(@item) ,class:"item-red-btn"%>
+        <%= link_to '購入画面に進む', item_purchases_path(@item, @purchase) ,class:"item-red-btn", data: {"turbolinks"=>false} %>
       <% end %>
     <% end %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @item.explain %></span>
     </div>
     <table class="detail-table">
       <tbody>

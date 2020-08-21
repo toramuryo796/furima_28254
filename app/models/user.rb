@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :items
-  has_many :purchase
+  has_many :purchases
     
   full_width_regex = /\A[ぁ-んァ-ンー-龥]+\z/
   katakana_regex = /\A[ァ-ヶー-]+\z/
