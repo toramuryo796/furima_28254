@@ -1,7 +1,7 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
-  const form = document.getElementById("charge-form");
-  form.addEventListener("submit", (e) => {
+  const form = document.getElementById("purchase-submit");
+  form.addEventListener("click", (e) => {
     e.preventDefault();
 
     const formResult = document.getElementById("charge-form");
