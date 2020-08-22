@@ -127,39 +127,40 @@
     <ul class='item-lists'>
 
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-      <% @items.each do |item| %>
-        <li class='list'>
-          <%= link_to item_path(item), local: true do %>
-          <div class='item-img-content'>
-            <%= image_tag item.image, class: "item-img" %>
+      <% unless @items.empty? %>
+        <% @items.each do |item| %>
+          <li class='list'>
+            <%= link_to item_path(item), local: true do %>
+            <div class='item-img-content'>
+              <%= image_tag item.image, class: "item-img" %>
 
-            <% if item.purchase %>
-              <div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div>
-            <% end %>
-          
-          </div>
-          <div class='item-info'>
-            <h3 class='item-name'>
-              <%= item.title %>
-            </h3>
-            <div class='item-price'>
-              <span><%= item.price %>円<br>(税込み)</span>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
+              <% if item.purchase %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
+            
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.title %>
+              </h3>
+              <div class='item-price'>
+                <span><%= item.price %>円<br>(税込み)</span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
               </div>
             </div>
-          </div>
-          <% end %>
-        </li>
-      <% end %>
+            <% end %>
+          </li>
+        <% end %>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
       <%# 商品がない場合のダミー %>
       <%# 商品がある場合は表示されないようにしましょう %>
-      <% if @items.empty? %>
+      <% else %>
         <li class='list'>
           <%= link_to new_item_path do %>
           <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
