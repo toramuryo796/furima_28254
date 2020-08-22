@@ -31,7 +31,6 @@ const pay = () => {
       } else {
       };
     });
-    
   });
 };
 window.addEventListener("load", pay);
