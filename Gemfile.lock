@@ -172,6 +172,9 @@ GEM
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
+    rails_same_site_cookie (0.1.8)
+      rack (>= 1.5)
+      user_agent_parser (~> 2.5)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (6.0.3.2)
@@ -250,6 +253,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    user_agent_parser (2.7.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.4)
@@ -293,6 +297,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 6.0.0)
   rails_12factor
+  rails_same_site_cookie
   rspec-rails (~> 4.0.0)
   sass-rails (~> 5)
   selenium-webdriver
