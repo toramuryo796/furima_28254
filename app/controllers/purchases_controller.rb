@@ -23,7 +23,7 @@ class PurchasesController < ApplicationController
       render :index
     end
   end
-  
+
   private
 
   def purchase_params
@@ -48,7 +48,7 @@ class PurchasesController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
+ 
   def move_to_root
     if current_user == @item.user
       redirect_to root_path
