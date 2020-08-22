@@ -27,7 +27,11 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id,  item_id: params[:item_id])
+    if user_signed_in?
+      params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id,  item_id: params[:item_id])
+    else
+      params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(item_id: params[:item_id])
+    end
   end
 
   def find_item
