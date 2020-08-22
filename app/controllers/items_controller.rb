@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :ajax, only: [:commission, :profit]
-  before_action :item_find , only: [:edit, :show, :update, :destroy]
+  before_action :item_find , only: [:edit, :show, :update, :destroy, :confirm_user]
+  before_action :move_to_index, only:[:new, :create]
+  before_action :confirm_user, only:[:edit, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -50,25 +51,25 @@ class ItemsController < ApplicationController
       render :show
     end
   end
-
-  def commission
-  end
-
-  def profit
-  end
   
   private
   def item_params
     params.require(:item).permit(:title, :explain, :price, :image, :category_id, :status_id, :fee_id, :origin_area_id, :take_day_id).merge(user_id: current_user.id)
   end
 
-  def ajax
-    item = Item.new(item_params)
-    render json:{ item: item }
-  end
-
   def item_find 
     @item = Item.find(params[:id])
   end
 
+  def move_to_index
+    unless user_signed_in?
+      render :index
+    end
+  end
+
+  def confirm_user
+    unless current_user == @item.user
+      render :show
+    end
+  end
 end
