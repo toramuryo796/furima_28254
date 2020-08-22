@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :confirm_user, only:[:edit, :update]
 
   def index
-    @items = Item.all.includes(:user).order("created_at DESC")
+    @items = Item.includes(:user).order("created_at DESC")
   end
 
   def show
@@ -63,13 +63,13 @@ class ItemsController < ApplicationController
 
   def move_to_index
     unless user_signed_in?
-      render :index
+      redirect_to root_path
     end
   end
 
   def confirm_user
     unless current_user == @item.user
-      render :show
+      redirect_to item_path(@item)
     end
   end
 end
