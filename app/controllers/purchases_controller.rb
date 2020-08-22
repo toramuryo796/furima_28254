@@ -9,7 +9,7 @@ class PurchasesController < ApplicationController
 
   def create
     price = @item.price
-    binding.pry
+    # binding.pry
     # if @item.user_id != purchase_params[:user_id]
       @purchase = Purchase.new(price: price, postal_code: purchase_params[:postal_code], origin_area_id: purchase_params[:origin_area_id], city: purchase_params[:city], house_number: purchase_params[:house_number], building_name: purchase_params[:building_name], phone_number: purchase_params[:phone_number], user_id: purchase_params[:user_id], item_id: purchase_params[:item_id])
     # else
