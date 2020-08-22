@@ -30,7 +30,6 @@ const pay = () => {
         document.getElementById("charge-form").reset();
       } else {
       };
-      debugger
     });
   });
 };
