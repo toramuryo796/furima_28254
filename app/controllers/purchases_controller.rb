@@ -23,7 +23,6 @@ class PurchasesController < ApplicationController
       render :index
     end
   end
-
   
   private
 
