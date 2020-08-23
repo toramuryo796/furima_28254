@@ -11,6 +11,7 @@ class Purchase < ApplicationRecord
   phone = /\A0[0-9]{9,10}\Z/
 
   with_options presence: true do
+  
     validates :price
     validates :postal_code,    format: {with: postal_code, message: "is invalid. Input number with '-'."}
     validates :origin_area_id, numericality: origin_area

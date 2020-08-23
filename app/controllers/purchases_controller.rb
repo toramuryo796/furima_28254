@@ -9,16 +9,18 @@ class PurchasesController < ApplicationController
 
   def create
     price = @item.price
-    if @item.user_id != purchase_params[:user_id]
-      @purchase = Purchase.new(price: price, postal_code: purchase_params[:postal_code], origin_area_id: purchase_params[:origin_area_id], city: purchase_params[:city], house_number: purchase_params[:house_number], building_name: purchase_params[:building_name], phone_number: purchase_params[:phone_number], user_id: purchase_params[:user_id], item_id: purchase_params[:item_id])
-    else
-      return false
-    end
-
-    if @purchase.valid?
-    pay_item
-    @purchase.save
-    redirect_to root_path
+    @purchase = Purchase.new(price: price, postal_code: purchase_params[:postal_code], origin_area_id: purchase_params[:origin_area_id], city: purchase_params[:city], house_number: purchase_params[:house_number], building_name: purchase_params[:building_name], phone_number: purchase_params[:phone_number], user_id: purchase_params[:user_id], item_id: purchase_params[:item_id])
+    # binding.pry
+    if @purchase.valid? && purchase_params[:token] == nil
+      @purchase.errors.add(:token ,"can't be blank")
+      render :index
+    elsif @purchase.valid?
+      pay_item
+      @purchase.save
+      redirect_to root_path
+    elsif purchase_params[:token] == nil
+      @purchase.errors.add(:token ,"is invalid")
+      render :index
     else
       render :index
     end
@@ -29,6 +31,7 @@ class PurchasesController < ApplicationController
   def purchase_params
     if user_signed_in?
       params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id,  item_id: params[:item_id])
+      # params.require(:purchase).permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id,  item_id: params[:item_id])
     else
       params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(item_id: params[:item_id])
     end
