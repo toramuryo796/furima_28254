@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one :purchase
-  has_one_attached :image
+  has_many_attached :images
   
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
@@ -21,6 +21,6 @@ class Item < ApplicationRecord
     validates :take_day_id, numericality: {only_integer: true, greater_than:0, less_than:4}
   end
 
-  validates :image, presence: true
+  validates :images, presence: true
     
 end

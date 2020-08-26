@@ -86,7 +86,13 @@
 }
 
 .click-upload>p {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+.img-preview{
+  width: 100px;
+  height: 100px;
 }
 
 /* /出品画像 */
