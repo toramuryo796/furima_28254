@@ -31,6 +31,7 @@
   min-height: 500px;
   background-color: rgb(205, 202, 202);
   object-fit: contain;
+  margin: 0 auto;
 }
 
 .item-price-box {
@@ -203,4 +204,22 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 23px;
+}
+
+ /* swiperのCSS */
+ .slide-item{
+  width: 60vw;
+  height: 50vh;
+  background: pink;
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+}
+.swiper-container {
+  width: 60vw;
+  height: 50vh;
+}
+.swiper-slide-active{
+  text-align: center;
+  width: 60vw;
 }
