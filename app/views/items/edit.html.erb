@@ -16,12 +16,28 @@ app/assets/stylesheets/items/new.css %>
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
+          <div>
+            <% @item.images.each do |image| %>
+              <%= image_tag image, class: 'images exist-image', data:{id: @image_id } %>
+              <% @image_id += 1 %>
+            <% end %>
+            <div id="img-preview">
+            </div>
+          </div>
       </div>
-      <div class="click-upload">
+
+      <div class="click-upload" id="click-upload">
+      <% @item.images.each do |item| %>
+        <p>
+          ファイルを変更
+        </p>
+          <%= f.file_field :images, name:'item[images][]', value:"#{item}", id:'exist-item-image', class:"item-image", data:{id: @btn_id} %>
+          <% @btn_id += 1 %>
+      <% end %>
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images, name:'item[images][]', id:"item-image" , clsss:"item-image", data:{id: @btn_id}%>
       </div>
     </div>
     <%# /出品画像 %>
@@ -152,7 +168,7 @@ app/assets/stylesheets/items/new.css %>
       <%= f.submit "変更する" ,class:"sell-btn" %>
       <%=link_to 'もどる', root_path , class:"back-btn" %>
     </div>
-    <%# /下部ボタン %>
+    <%# /下部ボタン%>
   </div>
   <% end %>
 
@@ -167,4 +183,6 @@ app/assets/stylesheets/items/new.css %>
       ©︎Furima,Inc.
     </p>
   </footer>
+    </div>
+  </div>
 </div>

@@ -42,6 +42,7 @@ function preview () {
       createHTML(blob);
     });
   }
+  
   const addImageBtns = document.getElementById("item-image")
   // 写真を選択したら,createHTMLが起動する
   addImageBtns.addEventListener("change", (e) =>{

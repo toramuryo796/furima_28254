@@ -32,6 +32,8 @@ class ItemsController < ApplicationController
   
   def edit
     @price = @item.price
+    @image_id = 1 
+    @btn_id = 1
     if @price 
       @commission = (@price * 0.1).to_i
       @profit = @price - @commission
