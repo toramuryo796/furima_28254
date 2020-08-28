@@ -16,28 +16,30 @@ app/assets/stylesheets/items/new.css %>
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
-          <div>
+          <div id="preview-large-box">
             <% @item.images.each do |image| %>
-              <%= image_tag image, class: 'images exist-image', data:{id: @image_id } %>
-              <% @image_id += 1 %>
+              <div id="exist-image-preview">
+                <%= image_tag image, class: 'images exist-image', data:{num: @image_id } %>
+                <% @image_id += 1 %>
+              </div>
             <% end %>
-            <div id="img-preview">
+            <div id="img-preview" class="image-preview">
             </div>
           </div>
       </div>
 
       <div class="click-upload" id="click-upload">
-      <% @item.images.each do |item| %>
-        <p>
-          ファイルを変更
+        <% @item.images.each do |item| %>
+          <p>
+            <%= @btn_id %>枚目のファイルを変更
+          </p>
+            <%= f.file_field :images, name:'item[images][]', value:"#{item}", id:'exist-item-image', class:"exist-item-image", data:{num: @btn_id} %>
+            <% @btn_id += 1 %>
+        <% end %>
+        <p id="add-text">
+          写真を追加
         </p>
-          <%= f.file_field :images, name:'item[images][]', value:"#{item}", id:'exist-item-image', class:"item-image", data:{id: @btn_id} %>
-          <% @btn_id += 1 %>
-      <% end %>
-        <p>
-          クリックしてファイルをアップロード
-        </p>
-        <%= f.file_field :images, name:'item[images][]', id:"item-image" , clsss:"item-image", data:{id: @btn_id}%>
+        <%= f.file_field :images, name:'item[images][]', id:"item-image" , class:"item-image", data:{num: @btn_id}%>
       </div>
     </div>
     <%# /出品画像 %>
