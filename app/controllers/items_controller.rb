@@ -11,6 +11,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @image_id = 1
+    @btn_id = 1
   end
 
   def create

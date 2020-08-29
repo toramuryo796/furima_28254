@@ -30,16 +30,30 @@ app/assets/stylesheets/items/new.css %>
 
       <div class="click-upload" id="click-upload">
         <% @item.images.each do |item| %>
-          <p>
-            <%= @btn_id %>枚目のファイルを変更
-          </p>
+          <div class="guide-box">
+            <div class="image-text-box">
+              <p>
+                写真を変更
+              </p>
+              <div class="open-delete-image">
+                / 削除
+              </div>
+            </div>
             <%= f.file_field :images, name:'item[images][]', value:"#{item}", id:'exist-item-image', class:"exist-item-image", data:{num: @btn_id} %>
             <% @btn_id += 1 %>
+          </div>
         <% end %>
-        <p id="add-text">
-          写真を追加
-        </p>
-        <%= f.file_field :images, name:'item[images][]', id:"item-image" , class:"item-image", data:{num: @btn_id}%>
+        <div class="guide-box">
+          <div class="image-text-box">
+            <p id="add-text">
+              写真を追加
+            </p>
+            <div class="hidden-delete-image">
+              / 削除
+            </div>
+          </div>
+          <%= f.file_field :images, name:'item[images][]', id:"item-image" , class:"item-image", data:{num: @btn_id}%>
+        </div>
       </div>
     </div>
     <%# /出品画像 %>

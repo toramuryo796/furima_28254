@@ -16,17 +16,26 @@
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
-        <div id="img-preview"></div>
-        <% @item.images.each do |image| %>
-          <%= image_tag image, class: 'images'%>
-        <% end %>
+        <div id="preview-large-box">
+            <%#<div id="exist-image-preview">
+            </div>%>
+          <div id= "img-preview" class="img-preview">
+          </div>
+        </div>
       </div>
 
       <div class="click-upload" id="click-upload">
-        <p>
-          クリックしてファイルをアップロード
-        </p>
-        <%= f.file_field :images, name:'item[images][]', id:"item-image", class:"item-image" %>
+        <div class="guide-box">
+          <div class="image-text-box">
+            <p id="add-text" class="add-text">
+              写真を追加
+            </p>
+            <div class="hidden-delete-image">
+              / 削除
+            </div>
+          </div>
+          <%= f.file_field :images, name:'item[images][]', id:"item-image", class:"item-image", data:{num:@btn_id} %>
+        </div>
       </div>
     </div>
     <%# /出品画像 %>
