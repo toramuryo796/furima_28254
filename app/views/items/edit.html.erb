@@ -17,13 +17,13 @@ app/assets/stylesheets/items/new.css %>
         出品画像
         <span class="indispensable">必須</span>
           <div id="preview-large-box">
-            <% @item.images.each do |image| %>
-              <div id="exist-image-preview">
-                <%= image_tag image, class: 'images exist-image', data:{num: @image_id } %>
-                <% @image_id += 1 %>
-              </div>
-            <% end %>
             <div id="img-preview" class="image-preview">
+              <% @item.images.each do |image| %>
+                <div id="exist-image-preview">
+                  <%= image_tag image, class: 'images exist-image', data:{num: @image_id } %>
+                  <% @image_id += 1 %>
+                </div>
+              <% end %>
             </div>
           </div>
       </div>

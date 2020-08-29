@@ -101,6 +101,11 @@
   flex-wrap: wrap;
 }
 
+#exist-image-preview{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .guide-box{
   margin-top: 5px;
   margin-right: 5px;
