@@ -4,11 +4,11 @@ function preview () {
   const addBtnPlace = document.getElementById("click-upload");  // 「写真を追加」テキストの置き場所
   const addImageBtn = document.getElementById("item-image");    //写真選択のボタン
   let addExistBtn;
+  let imageNum;
   
   // 出品時の処理
   const createHTML = (blob) => {
     let imageTexts = document.querySelectorAll(".add-text")
-    console.log(imageTexts)
     imageTexts.forEach(function (btn){
       btn.innerHTML = "<p>写真を変更</p>"
     });
@@ -22,7 +22,7 @@ function preview () {
     deleteSigns.forEach(function(deleteSign){
       deleteSign.setAttribute("style", "display: block;")
     })
-
+    
     //出品時の選択ボタンのId,classを変更する
     let addBtn = document.getElementById("item-image") 
     // 元のclass, idを削除
@@ -32,13 +32,14 @@ function preview () {
     addBtn.id = "exist-item-image"
     
     // 選択された画像及びボタンがいくつあるか
-    let imageElementNum = document.querySelectorAll('.exist-item-image').length 
-    let imageNum = document.querySelectorAll('.exist-image').length
+    // let imageElementNum = document.querySelectorAll('.exist-item-image').length  //選択済みのボタン数
+    imageNum = document.querySelectorAll('.show-item-image').length //選択済みの写真数
+    console.log(imageNum)
     // console.log(imageElementNum)
     // 写真を入れるdiv及び追加写真を作成
     const imageElement = `
     <div id="addImageElement">
-      <img src=${blob} class="exist-image exist-item-image" data-num="${imageNum+1}">
+      <img src=${blob} class="exist-image show-item-image" data-num="${imageNum+1}">
     </div>` 
     // 追加ボタンのアナウンス及び追加ボタンを作成
     const addImageTextBtn = `
@@ -51,8 +52,9 @@ function preview () {
           / 削除         
        </div>
       </div>
-      <input id="item-image" class="item-image" data-num="${imageNum+2}"   name="item[image][]" type="file">
+      <input id="item-image" class="item-image" data-num="${imageNum+2}" name="item[image][]" type="file">
     </div>`
+    console.log(imageNum)
     // 画像を表示
     imagePreview.insertAdjacentHTML("beforeend",  imageElement)
     // 追加ボタンを表示
@@ -96,7 +98,7 @@ function preview () {
   
   //画像変更時の処理
   const editHTML = (blob, id_num) => {
-    let count = document.querySelectorAll(".item-image").length // 写真数
+    // let count = document.querySelectorAll(".item-image").length // 写真数
     let existImages = document.querySelectorAll(".exist-image")  //既にある写真を取得
     // すでにあるデータを削除
     existImages.forEach(function(image){
@@ -104,7 +106,7 @@ function preview () {
       if (image.dataset.num === id_num){
         const imageElement = image.parentNode  //変更する写真の置き場所を取得
         image.remove();
-        const blobImage = `<img src="${blob}" class="exist-image" data-num="${id_num}">`  // 追加する写真を取得
+        const blobImage = `<img src="${blob}" class="exist-image show-item-image" data-num="${id_num}">`  // 追加する写真を取得
         imageElement.insertAdjacentHTML("beforeend", blobImage)
         
         let addExistBtn = document.querySelectorAll(".exist-item-image")
