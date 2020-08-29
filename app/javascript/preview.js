@@ -48,9 +48,9 @@ function preview () {
         <p id="add-text" class="add-text">
           写真を追加
         </p>
-        <div class="hidden-delete-image">
+        <a href="#" class="hidden-delete-image" data-num="${imageNum+1}">
           / 削除         
-       </div>
+       </a>
       </div>
       <input id="item-image" class="item-image" data-num="${imageNum+2}" name="item[image][]" type="file">
     </div>`
@@ -69,7 +69,7 @@ function preview () {
         const imageUrl = window.URL.createObjectURL(file);
         editHTML(imageUrl, id_num);
       });
-    })
+    });
 
     // 追加HTMLでも出品時の発火させる
     const addImage = document.getElementById("item-image")
@@ -79,6 +79,19 @@ function preview () {
         blob = window.URL.createObjectURL(file);
         createHTML(blob);
       }
+    });
+
+    // 写真の削除
+    const deleteButtons = document.querySelectorAll(".open-delete-image")
+    debugger
+    deleteButtons.forEach(function(btn){
+      debugger
+      btn.addEventListener("click", (e) => {
+        debugger
+        let btnNumber = btn.dataset.num     //削除ボタンの数字
+        debugger
+        deleteImage(btnNumber)
+      })
     });
   } 
   // 出品時処理終わり
@@ -93,7 +106,7 @@ function preview () {
     }
   });
   
-  //=================================================================================================
+  //============写真変更処理=====================================================================================
   const existImagePreview = document.getElementById("exist-image-preview");     //出品時の写真を入れる箇所を取得
   
   //画像変更時の処理
@@ -124,7 +137,7 @@ function preview () {
   }
   
   let btns = document.querySelectorAll(".exist-item-image")                     // 画面上の全ての選択ボタン取得
-  
+  //写真変更処理
   btns.forEach(function(btn){
     btn.addEventListener("change", (e) => {
       // 選択ボタンのdata-numの数字
@@ -135,6 +148,37 @@ function preview () {
       editHTML(imageUrl, id_num);
     });
   })
+  
+  
+  // ==========写真削除==================================================================
+  const deleteImage = (btnNum) => {
+    let imageVolumes = document.querySelectorAll(".show-item-image") 
+    let imageBtnVolumes = document.querySelectorAll(".exist-item-image")
+    //削除処理
+    console.log(imageBtnVolumes)
+    debugger
+    imageVolumes.forEach(function(image){
+      if (image.dataset.num === btnNum){
+        debugger
+        image.parentNode.remove();
+      }
+    });
+    imageBtnVolumes.forEach(function(btn){
+      if (btn.dataset.num === btnNum ){
+        debugger
+        btn.parentNode.remove()
+      }
+    });
+  }
+  
+  const deleteImages = document.querySelectorAll(".open-delete-image")
+  deleteImages.forEach(function(btn){
+    btn.addEventListener("click", (e) => {
+      const btnNum = btn.dataset.num    //削除ボタンの数字
+      debugger
+      deleteImage(btnNum)
+    })
+  });
 }
 
 window.addEventListener("load",preview)
