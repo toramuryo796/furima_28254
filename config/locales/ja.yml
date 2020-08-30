@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    attributes:
+      user: 
+        nickname: ニックネーム
+        birth_date: 誕生日
+        first_name: 名前
+        family_name: 苗字
+        first_name_reading: フリガナ(名前)
+        family_name_reading: フリガナ(苗字)
+      item:
+        title: 商品名
+        explain: 商品説明
+        price: 価格
+        category_id: カテゴリー
+        status_id: 商品の状態
+        fee_id: 配送料の負担
+        origin_area_id: 発送元の地域
+        take_day_id: 発送日の目安
+      purchase: 
+        price: 価格
+        postal_code: 郵便番号
+        origin_area_id: 都道府県
+        city: 市町村
+        house_number: 番地
+        phone_number: 電話番号

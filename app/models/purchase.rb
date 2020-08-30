@@ -12,10 +12,10 @@ class Purchase < ApplicationRecord
 
   with_options presence: true do
     validates :price
-    validates :postal_code,    format: { with: postal_code, message: "is invalid. Input number with '-'." }
-    validates :origin_area_id, numericality: origin_area
-    validates :city,           format: { with: full_characters, message: 'is invalid. Input full_width characters.' }
-    validates :house_number,   format: { with: number_full_characters, message: 'is invalid. Input full_width characters or number.' }
-    validates :phone_number,   format: { with: phone, message: 'is invalid. Input 10 or 11 numbers' }
+    validates :postal_code,    format: { with: postal_code, message: "には'-'(ハイフン)を入れてください" }
+    validates :origin_area_id
+    validates :city,           format: { with: full_characters, message: 'は全角文字を入力してください' }
+    validates :house_number,   format: { with: number_full_characters, message: 'は全角文字または半角数字を入力してください' }
+    validates :phone_number,   format: { with: phone, message: 'は半角数字の10または11桁の数字を入れてください' }
   end
 end
