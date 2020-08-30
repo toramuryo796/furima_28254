@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :purchases
+  has_one :card, dependent: :destroy
 
   full_width_regex = /\A[ぁ-んァ-ンー-龥]+\z/
   katakana_regex = /\A[ァ-ヶー-]+\z/

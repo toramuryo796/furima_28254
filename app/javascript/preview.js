@@ -49,10 +49,10 @@ function preview () {
           写真を追加
         </p>
         <a href="#" class="hidden-delete-image" data-num="${imageNum+1}">
-          / 削除         
+          /削除         
        </a>
       </div>
-      <input id="item-image" class="item-image" data-num="${imageNum+2}" name="item[image][]" type="file">
+      <input id="item-image" class="item-image" data-num="${imageNum+2}" name="item[images][]" type="file">
     </div>`
     console.log(imageNum)
     // 画像を表示

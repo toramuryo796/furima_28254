@@ -18,7 +18,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     price = @item.price
-
     if price
       @commission = (price * 0.1).to_i
       @profit = price - @commission

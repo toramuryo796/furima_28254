@@ -4,37 +4,24 @@ class PurchasesController < ApplicationController
   before_action :move_to_root, only: %i[index create]
 
   def index
-    @purchase = Purchase.new
+    @purchase = CardPurchase.new
+    @card = Card.find_by(user_id: current_user.id)
   end
 
   def create
-    price = @item.price
-    @purchase = Purchase.new(price: price, postal_code: purchase_params[:postal_code], origin_area_id: purchase_params[:origin_area_id], city: purchase_params[:city], house_number: purchase_params[:house_number], building_name: purchase_params[:building_name], phone_number: purchase_params[:phone_number], user_id: purchase_params[:user_id], item_id: purchase_params[:item_id])
-    # binding.pry
-    if @purchase.valid? && purchase_params[:token].nil?
-      @purchase.errors.add(:token, "can't be blank")
-      render :index
-    elsif @purchase.valid?
-      pay_item
+    @card = Card.find_by(user_id: current_user.id)
+    @purchase = CardPurchase.new(purchase_params)
+    if @purchase.valid?
       @purchase.save
-      redirect_to root_path
-    elsif purchase_params[:token].nil?
-      @purchase.errors.add(:token, 'is invalid')
-      render :index
+      return redirect_to root_path
     else
-      render :index
+      return render :index
     end
   end
-
   private
 
   def purchase_params
-    if user_signed_in?
       params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
-      # params.require(:purchase).permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(user_id: current_user.id,  item_id: params[:item_id])
-    else
-      params.permit(:token, :postal_code, :origin_area_id, :city, :house_number, :building_name, :phone_number).merge(item_id: params[:item_id])
-    end
   end
 
   def find_item
