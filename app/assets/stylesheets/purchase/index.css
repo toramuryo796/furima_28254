@@ -20,6 +20,25 @@
 }
 
 /* 購入内容の表示 */
+
+/* 商品写真 */
+
+.purchase-images-box{
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  justify-content: center;
+}
+
+.buy-item-img {
+  margin-right: 10px;
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+}
+
+/* /商品写真 */
+
 .buy-item-info {
   height: 150px;
   border-bottom: 2px solid #f5f5f5;
@@ -28,12 +47,6 @@
   justify-content: center;
 }
 
-.buy-item-img {
-  margin-right: 20px;
-  height: 130px;
-  width: 250px;
-  object-fit: contain;
-}
 
 .buy-item-right-content {
   display: flex;
