@@ -74,21 +74,50 @@
 
 /* 出品画像 */
 .img-upload {
-  display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   padding: 2vh 0;
 }
 
 .click-upload {
-  margin: 15px 0;
+  margin: 10px 0;
   min-width: 250px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .click-upload>p {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+  margin-top: 15px;
 }
 
+.exist-image{
+  width: 100px;
+  height: 100px;
+  margin-right:5px;
+}
+
+#img-preview{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#exist-image-preview{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.guide-box{
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.hidden-delete-image{
+  display: none;
+}
+
+.image-text-box{
+  display: flex;
+}
 /* /出品画像 */
 
 /* 商品名と商品説明 */

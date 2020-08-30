@@ -16,16 +16,28 @@
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
-      </div>
-      <div class="click-upload">
-        <p>
-          クリックしてファイルをアップロード
-        </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <div id="preview-large-box">
+          <div id= "img-preview" class="img-preview">
+          </div>
+        </div>
       </div>
 
+      <div class="click-upload" id="click-upload">
+        <div class="guide-box">
+          <div class="image-text-box">
+            <p id="add-text" class="add-text">
+              写真を追加
+            </p>
+            <a href="#" class="hidden-delete-image">
+              / 削除
+            </a>
+          </div>
+          <%= f.file_field :images, name:'item[images][]', id:"item-image", class:"item-image", data:{num:1} %>
+        </div>
+      </div>
     </div>
     <%# /出品画像 %>
+    
     <%# 商品名と商品説明 %>
     <div class="new-items">
       <div class="weight-bold-text">

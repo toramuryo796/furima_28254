@@ -131,7 +131,11 @@
         <li class='list'>
           <%= link_to item_path(item), local: true do %>
           <div class='item-img-content'>
-            <%= image_tag item.image, class: "item-img" %>
+            <% if item.images.length > 1 %>
+              <%= image_tag item.images.slice(0), class: "item-img" %>
+            <% else %>
+              <%= image_tag item.images, class: "item-img" %>
+            <% end %>
 
             <% if item.purchase %>
               <div class='sold-out'>

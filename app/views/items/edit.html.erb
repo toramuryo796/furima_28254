@@ -16,12 +16,44 @@ app/assets/stylesheets/items/new.css %>
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
+          <div id="preview-large-box">
+            <div id="img-preview" class="image-preview">
+              <% @item.images.each do |image| %>
+                <div id="exist-image-preview">
+                  <%= image_tag image, class: 'exist-image show-item-image', data:{num: @image_id } %>
+                  <% @image_id += 1 %>
+                </div>
+              <% end %>
+            </div>
+          </div>
       </div>
-      <div class="click-upload">
-        <p>
-          クリックしてファイルをアップロード
-        </p>
-        <%= f.file_field :image, id:"item-image" %>
+
+      <div class="click-upload" id="click-upload">
+        <% @item.images.each do |item| %>
+          <div class="guide-box">
+            <div class="image-text-box">
+              <p>
+                写真を変更
+              </p>
+              <a href="#" class="open-delete-image" data-num="<%=@btn_id%>">
+                / 削除
+              </a>
+            </div>
+            <%= f.file_field :images, name:'item[images][]', value:"#{item}", id:'exist-item-image', class:"exist-item-image", data:{num: @btn_id} %>
+            <% @btn_id += 1 %>
+          </div>
+        <% end %>
+        <div class="guide-box">
+          <div class="image-text-box">
+            <p id="add-text">
+              写真を追加
+            </p>
+            <a href="#" class="hidden-delete-image" data-num="<%= @btn_id %>">
+              / 削除
+            </a>
+          </div>
+          <%= f.file_field :images, name:'item[images][]', id:"item-image" , class:"item-image", data:{num: @btn_id}%>
+        </div>
       </div>
     </div>
     <%# /出品画像 %>
@@ -152,7 +184,7 @@ app/assets/stylesheets/items/new.css %>
       <%= f.submit "変更する" ,class:"sell-btn" %>
       <%=link_to 'もどる', root_path , class:"back-btn" %>
     </div>
-    <%# /下部ボタン %>
+    <%# /下部ボタン%>
   </div>
   <% end %>
 
@@ -167,4 +199,6 @@ app/assets/stylesheets/items/new.css %>
       ©︎Furima,Inc.
     </p>
   </footer>
+    </div>
+  </div>
 </div>

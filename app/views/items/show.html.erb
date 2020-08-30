@@ -7,13 +7,30 @@
       <%= @item.title %>
     </h2>
     <div class='item-img-content'>
-      <%= image_tag @item.image ,class:"item-box-img" %>
-  
-      <% if @item.purchase %>
-        <div class='sold-out'>
-          <span>Sold Out!!</span>
-        </div>
+      
+      <div class="swiper-container">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+      <% @item.images.each do |image| %>
+      <div class="swiper-slide"><%= image_tag image ,class:"item-box-img" %></div>
+        <% if @item.purchase %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+        <% end %>
       <% end %>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>
       
     </div>
     <div class="item-price-box">
@@ -105,3 +122,4 @@
 </div>
 
 <%= render "shared/footer" %>
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
