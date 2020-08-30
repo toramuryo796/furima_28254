@@ -13,11 +13,11 @@ class User < ApplicationRecord
   validates :birth_date, presence: true
   with_options presence: true do
     validates :nickname, length: { maximum: 40 }, format: { with: /\A[a-zA-Zぁ-んァ-ンー-龥]+\Z/ }
-    validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "is invalid. Include '@'." }
-    validates :password, format: { with: /(?=.*\d+.*)(?=.*[a-zA-Z]+.*)+/, message: 'is invalid.Input half_width characters and number.' }
-    validates :first_name, format: { with: full_width_regex, message: 'is invalid. Input full_width characters.' }
-    validates :family_name, format: { with: full_width_regex, message: 'is invalid. Input full_width characters.' }
-    validates :first_name_reading, format: { with: katakana_regex, message: 'is invalid. Input half_width characters.' }
-    validates :family_name_reading, format: { with: katakana_regex, message: 'is invalid. Input half_width characters.' }
+    validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "には'@'をつけてください" }
+    validates :password, format: { with: /(?=.*\d+.*)(?=.*[a-zA-Z]+.*)+/, message: 'は半角英数字を混合させて入力してください' }
+    validates :first_name, format: { with: full_width_regex, message: 'は全角文字を入力してください' }
+    validates :family_name, format: { with: full_width_regex, message: 'は全角文字を入力してください' }
+    validates :first_name_reading, format: { with: katakana_regex, message: 'は半角文字を入力してください' }
+    validates :family_name_reading, format: { with: katakana_regex, message: 'は半角文字を入力してください' }
   end
 end
