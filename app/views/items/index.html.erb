@@ -1,3 +1,4 @@
+<% breadcrumb :root %>
 <%= render "shared/header" %>
 <div class='main'>
 
@@ -130,27 +131,26 @@
       <% @items.each do |item| %>
         <li class='list'>
           <%= link_to item_path(item), local: true do %>
-          <div class='item-img-content'>
-            <%= image_tag item.images.slice(0), class: "item-img" %>
-            <% if item.purchase %>
-              <div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div>
-            <% end %>
-          
-          </div>
-          <div class='item-info'>
-            <h3 class='item-name'>
-              <%= item.title %>
-            </h3>
-            <div class='item-price'>
-              <span><%= item.price %>円<br>(税込み)</span>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
+            <div class='item-img-content'>
+              <%= image_tag item.images.slice(0), class: "item-img" %>
+              <% if item.purchase %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>         
+            </div>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                <%= item.title %>
+              </h3>
+              <div class='item-price'>
+                <span><%= item.price %>円<br>(税込み)</span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
               </div>
             </div>
-          </div>
           <% end %>
         </li>
       <% end %>
@@ -161,19 +161,19 @@
       <% if @items.empty? %>
         <li class='list'>
           <%= link_to new_item_path do %>
-          <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
-          <div class='item-info'>
-            <h3 class='item-name'>
-              商品を出品してね！
-            </h3>
-            <div class='item-price'>
-              <span>99999999円<br>(税込み)</span>
-              <div class='star-btn'>
-                <%= image_tag "star.png", class:"star-icon" %>
-                <span class='star-count'>0</span>
+            <%= image_tag "https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", class: "item-img" %>
+            <div class='item-info'>
+              <h3 class='item-name'>
+                商品を出品してね！
+              </h3>
+              <div class='item-price'>
+                <span>99999999円<br>(税込み)</span>
+                <div class='star-btn'>
+                  <%= image_tag "star.png", class:"star-icon" %>
+                  <span class='star-count'>0</span>
+                </div>
               </div>
             </div>
-          </div>
           <% end %>
         </li>
       <% end %>

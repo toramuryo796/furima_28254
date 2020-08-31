@@ -15,8 +15,11 @@ class CardsController < ApplicationController
       customer_token: customer.id,
       user_id: current_user.id,
     )
-    if card.save
-      redirect_to root_path
+    if card.valid?
+      if card.card_token?
+        card.save
+        redirect_to root_path
+      end
     else
       render :new
     end
