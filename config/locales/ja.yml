@@ -3,6 +3,7 @@ ja:
     attributes:
       user: 
         nickname: ニックネーム
+      personal:
         birth_date: 誕生日
         first_name: 名前
         family_name: 苗字
