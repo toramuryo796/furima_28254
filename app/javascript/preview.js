@@ -83,13 +83,9 @@ function preview () {
 
     // 写真の削除
     const deleteButtons = document.querySelectorAll(".open-delete-image")
-    debugger
     deleteButtons.forEach(function(btn){
-      debugger
       btn.addEventListener("click", (e) => {
-        debugger
         let btnNumber = btn.dataset.num     //削除ボタンの数字
-        debugger
         deleteImage(btnNumber)
       })
     });
@@ -156,7 +152,6 @@ function preview () {
     let imageBtnVolumes = document.querySelectorAll(".exist-item-image")
     //削除処理
     console.log(imageBtnVolumes)
-    debugger
     imageVolumes.forEach(function(image){
       if (image.dataset.num === btnNum){
         debugger
@@ -165,7 +160,6 @@ function preview () {
     });
     imageBtnVolumes.forEach(function(btn){
       if (btn.dataset.num === btnNum ){
-        debugger
         btn.parentNode.remove()
       }
     });
@@ -175,7 +169,6 @@ function preview () {
   deleteImages.forEach(function(btn){
     btn.addEventListener("click", (e) => {
       const btnNum = btn.dataset.num    //削除ボタンの数字
-      debugger
       deleteImage(btnNum)
     })
   });
