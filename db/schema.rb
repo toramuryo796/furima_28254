@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_30_042346) do
+ActiveRecord::Schema.define(version: 2020_09_01_022241) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +67,18 @@ ActiveRecord::Schema.define(version: 2020_08_30_042346) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "personals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "family_name", null: false
+    t.string "first_name_reading", null: false
+    t.string "family_name_reading", null: false
+    t.date "birth_date", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_personals_on_user_id"
+  end
+
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "postal_code", null: false
     t.integer "origin_area_id", null: false
@@ -82,6 +94,15 @@ ActiveRecord::Schema.define(version: 2020_08_30_042346) do
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
+  create_table "sns_credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
+  end
+
   create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -94,11 +115,6 @@ ActiveRecord::Schema.define(version: 2020_08_30_042346) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
-    t.string "first_name", null: false
-    t.string "family_name", null: false
-    t.string "first_name_reading", null: false
-    t.string "family_name_reading", null: false
-    t.date "birth_date", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -115,4 +131,5 @@ ActiveRecord::Schema.define(version: 2020_08_30_042346) do
   add_foreign_key "items", "users"
   add_foreign_key "purchases", "items"
   add_foreign_key "purchases", "users"
+  add_foreign_key "sns_credentials", "users"
 end
