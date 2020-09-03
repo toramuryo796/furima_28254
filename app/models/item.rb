@@ -2,6 +2,8 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :purchase
   has_many_attached :images
+  has_many :likes
+  has_many :liked_users, through: :Likes, source: :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category

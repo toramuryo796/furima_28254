@@ -87,10 +87,38 @@
       </tbody>
     </table>
     <div class="option">
-      <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り 0</span>
+
+      <div class="favorite-btn" id="favorite-box" data-num="<%= @item.id %>">
+        <div id="fav-box">
+          <% if current_user.already_liked?(@item) %>
+            <%# お気に入りされている場合 %>
+            <div class="open-back-yellow">  
+              <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+              <%# クリックで発火 %>
+              <span>
+                <a href="#" class="like-a like-btn"  data-num="<%=@like_id%>">
+                  お気に入り解除 
+                  <div class="count" data-num="<%=@item.likes.count%>">
+                    <%= @item.likes.count %>
+                  </div>
+                </a>
+              </span>
+            </div>
+          <% else %>
+            <%# お気に入りされていない場合 %>
+            <div class="open-back-white">
+              <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+              <%# クリックで発火 %>
+              <span>
+                <a href="#" class="like-a like-btn">
+                  お気に入り <%= @item.likes.count %>
+                </a>
+              </span>  
+            </div>
+          <% end %>
+        </div>
       </div>
+
       <div class="report-btn">
         <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
         <span>不適切な商品の通報</span>

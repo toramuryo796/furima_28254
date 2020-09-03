@@ -7,12 +7,21 @@ class ItemsController < ApplicationController
     @items = Item.includes(:user).order('created_at DESC')
   end
 
-  def show; end
+  def show
+    if @item.likes
+      @item.likes.each do |like|
+        if current_user.likes.ids.include?(like.id)
+          @like_id = like.id
+        end
+      end
+    end
+  end
 
   def new
     @item = Item.new
     @image_id = 1
     @btn_id = 1
+    @like = Like.new
   end
 
   def create

@@ -223,3 +223,12 @@
   text-align: center;
   width: 60vw;
 }
+
+/* お気に入り機能 */
+.hidden-back-white, .hidden-back-yellow {
+  display: none;
+}
+
+.open-back-yellow {
+  background-color: #F94B00;
+}
