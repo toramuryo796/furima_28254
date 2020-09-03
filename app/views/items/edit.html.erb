@@ -20,11 +20,12 @@ app/assets/stylesheets/items/new.css %>
           <div id="preview-large-box">
             <div id="img-preview" class="image-preview">
               <% @item.images.each do |image| %>
-                <div id="exist-image-preview">
+                <div id="addImageElement" class="addImageElement" data-num=<%=@image_id%> >
                   <%= image_tag image, class: 'exist-image show-item-image', data:{num: @image_id } %>
                   <% @image_id += 1 %>
                 </div>
               <% end %>
+              <%# 追加写真はここ %>
             </div>
           </div>
       </div>
@@ -36,8 +37,9 @@ app/assets/stylesheets/items/new.css %>
               <p>
                 写真を変更
               </p>
+              <p class="open-slash"> &nbsp;／&nbsp; </p>
               <a href="#" class="open-delete-image" data-num="<%=@btn_id%>">
-                / 削除
+                 削除
               </a>
             </div>
             <%= f.file_field :images, name:'item[images][]', value:"#{item}", id:'exist-item-image', class:"exist-item-image", data:{num: @btn_id} %>
@@ -49,8 +51,9 @@ app/assets/stylesheets/items/new.css %>
             <p id="add-text">
               写真を追加
             </p>
+            <p class="hidden-slash"> &nbsp;／&nbsp; </p>
             <a href="#" class="hidden-delete-image" data-num="<%= @btn_id %>">
-              / 削除
+               削除
             </a>
           </div>
           <%= f.file_field :images, name:'item[images][]', id:"item-image" , class:"item-image", data:{num: @btn_id}%>

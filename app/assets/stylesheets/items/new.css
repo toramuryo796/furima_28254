@@ -111,7 +111,7 @@
   margin-right: 5px;
 }
 
-.hidden-delete-image{
+.hidden-delete-image, .hidden-slash{
   display: none;
 }
 

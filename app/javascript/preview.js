@@ -5,6 +5,7 @@ function preview () {
   const addImageBtn = document.getElementById("item-image");    //写真選択のボタン
   let addExistBtn;
   let imageNum;
+  let deleteButtons; 
   
   // 出品時の処理
   const createHTML = (blob) => {
@@ -16,6 +17,11 @@ function preview () {
     let deleteBtns = document.querySelectorAll(".hidden-delete-image") 
     deleteBtns.forEach(function(deleteBtn){
       deleteBtn.setAttribute("class", "open-delete-image")
+    });
+    //slashもopenにする
+    let openSlashes = document.querySelectorAll(".hidden-slash") 
+    openSlashes.forEach(function(slash){
+      slash.setAttribute("class", "open-slash")
     });
     // 削除ボタンを表示させる
     let deleteSigns = document.querySelectorAll(".open-delete-image")
@@ -38,8 +44,8 @@ function preview () {
     // console.log(imageElementNum)
     // 写真を入れるdiv及び追加写真を作成
     const imageElement = `
-    <div id="addImageElement">
-      <img src=${blob} class="exist-image show-item-image" data-num="${imageNum+1}">
+    <div id="addImageElement" class="addImageElement" data-num="${imageNum+2}">
+      <img src=${blob} class="exist-image show-item-image" data-num="${imageNum+2}">
     </div>` 
     // 追加ボタンのアナウンス及び追加ボタンを作成
     const addImageTextBtn = `
@@ -48,8 +54,9 @@ function preview () {
         <p id="add-text" class="add-text">
           写真を追加
         </p>
-        <a href="#" class="hidden-delete-image" data-num="${imageNum+1}">
-          /削除         
+        <p class="hidden-slash">&nbsp;／&nbsp; </p>
+        <a href="#" class="hidden-delete-image" data-num="${imageNum+2}">
+          削除         
        </a>
       </div>
       <input id="item-image" class="item-image" data-num="${imageNum+2}" name="item[images][]" type="file">
@@ -82,7 +89,7 @@ function preview () {
     });
 
     // 写真の削除
-    const deleteButtons = document.querySelectorAll(".open-delete-image")
+    deleteButtons = document.querySelectorAll(".open-delete-image")
     deleteButtons.forEach(function(btn){
       btn.addEventListener("click", (e) => {
         let btnNumber = btn.dataset.num     //削除ボタンの数字
@@ -148,21 +155,48 @@ function preview () {
   
   // ==========写真削除==================================================================
   const deleteImage = (btnNum) => {
-    let imageVolumes = document.querySelectorAll(".show-item-image") 
-    let imageBtnVolumes = document.querySelectorAll(".exist-item-image")
+    let imageVolumes = document.querySelectorAll(".show-item-image") ;
+    let imageBtnVolumes = document.querySelectorAll(".exist-item-image");
+    let itemImage = document.querySelector(".item-image");
+    let imageParentBoxes = document.querySelectorAll(".addImageElement")
     //削除処理
-    console.log(imageBtnVolumes)
-    imageVolumes.forEach(function(image){
-      if (image.dataset.num === btnNum){
-        debugger
-        image.parentNode.remove();
+    imageParentBoxes.forEach(function(box){
+      console.log(btnNum)
+      if (box.dataset.num === btnNum){
+        box.remove();
       }
     });
-    imageBtnVolumes.forEach(function(btn){
-      if (btn.dataset.num === btnNum ){
-        btn.parentNode.remove()
+
+    let parentBoxes = document.querySelectorAll(".addImageElement")
+    parentBoxes.forEach(function(box){
+      if (box.dataset.num >= btnNum){
+        box.dataset.num -= 1;
       }
     });
+    
+    let  changeNumImages = document.querySelectorAll(".show-item-image");
+    changeNumImages.forEach(function(image){
+      if (image.dataset.num >= btnNum){
+        image.dataset.num -= 1;
+      }
+    });
+
+     // 追加HTMLでも出品時の発火させる
+     const plusImage = document.getElementById("item-image")
+     plusImage.addEventListener("change", (e) => {
+       if (plusImage.id === "item-image" ){
+         file = e.target.files[0];
+         blob = window.URL.createObjectURL(file);
+         createHTML(blob);
+       }
+     });
+
+    // imageBtnVolumes.forEach(function(btn){
+    //   if (btn.dataset.num === btnNum ){
+    //      btn.parentNode.remove();
+    //      itemImage.dataset.num -= 1;
+    //   }
+    // });
   }
   
   const deleteImages = document.querySelectorAll(".open-delete-image")

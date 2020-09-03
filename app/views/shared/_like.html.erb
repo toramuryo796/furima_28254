@@ -1,0 +1,25 @@
+<% if current_user.already_liked?(item) %>
+  <%# お気に入りされている場合 %>
+  <div class="open-back-yellow">  
+    <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+    <%# クリックで発火 %>
+    <span>
+      <%= link_to "お気に入り解除",items_path, class:"like-a like-btn", method: :post,  data:{num:like_id} %>
+        <div class="count" data-num="<%=item.likes.count%>">
+          <%= item.likes.count %>
+        </div>
+      </a>
+    </span>
+  </div>
+<% else %>
+  <%# お気に入りされていない場合 %>
+  <div class="open-back-white">
+    <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
+    <%# クリックで発火 %>
+    <span>
+      <a href="#" class="like-a like-btn">
+        お気に入り <%= item.likes.count %>
+      </a>
+    </span>  
+  </div>
+<% end %>
