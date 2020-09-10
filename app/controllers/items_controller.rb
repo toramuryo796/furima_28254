@@ -8,20 +8,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-    if @item.likes
-      @item.likes.each do |like|
-        if current_user.likes.ids.include?(like.id)
-          @like_id = like.id
-        end
-      end
-    end
+    @user = current_user
   end
 
   def new
     @item = Item.new
     @image_id = 1
     @btn_id = 1
-    @like = Like.new
   end
 
   def create

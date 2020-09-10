@@ -9,12 +9,6 @@ class User < ApplicationRecord
   has_one :card, dependent: :destroy
   has_one :personal
   has_many :sns_credentials
-  has_many :likes, dependent: :destroy
-  has_many :liked_items, through: :Likes, source: :post
-
-  def already_liked?(item)
-    self.likes.exists?(item_id: item.id)
-  end
 
   def self.from_omniauth(auth)
     sns = SnsCredential.where(provider: auth.proider, uid: auth.uid).first_or_create
