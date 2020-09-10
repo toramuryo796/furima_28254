@@ -17,7 +17,8 @@ class CardPurchase
     validates :phone_number,   format: { with: phone, message: 'は半角数字の10または11桁の数字を入れてください' }
   end
   def save
-    unless @card.present?
+    @user = User.find_by(id: user_id)
+    unless @user.card.present?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       customer = Payjp::Customer.create(
         description: 'test',
