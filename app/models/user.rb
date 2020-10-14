@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
 
   with_options presence: true do
-    validates :nickname, length: { maximum: 40 }, format: { with: /\A[a-zA-Zぁ-んァ-ンー-龥]+\Z/, message: " 数字・スペースを入れないでください" }
+    validates :nickname, length: { maximum: 40 }, format: { with: /\A[a-zA-Zぁ-んァ-ンー-龥]+\Z/, message: " は数字・スペースを入れないでください" }
     validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "には'@'をつけてください" }
     validates :password, format: { with: /(?=.*\d+.*)(?=.*[a-zA-Z]+.*)+/, message: 'は半角英数字を混合させて入力してください' }
   end
